@@ -16,10 +16,11 @@ const client = new MongoClient(uri, {
 });
 client.connect((err) => {
   const productsCollection = client.db("emaJohnStore").collection("products");
+  const ordersCollection = client.db("emaJohnStore").collection("orders");
 
   app.post("/addProduct", (req, res) => {
     const products = req.body;
-    productsCollection.insertMany(products).then((result) => {
+    productsCollection.insertOne(products).then((result) => {
       console.log(result.insertedCount);
       res.send(result.insertedCount);
     });
@@ -34,6 +35,21 @@ client.connect((err) => {
   app.get("/product/:key", (req, res) => {
     productsCollection.find({ key: req.params.key }).toArray((err, doc) => {
       res.send(doc[0]);
+    });
+  });
+
+  app.post("/productsByKeys", (req, res) => {
+    const productKeys = req.body;
+    productsCollection
+      .find({ key: { $in: productKeys } }) //$in check many value
+      .toArray((err, doc) => {
+        res.send(doc);
+      });
+  });
+
+  app.post("/addOrder", (req, res) => {
+    ordersCollection.insertOne(order).then((result) => {
+      res.send(result.insertedCount > 0);
     });
   });
 });
