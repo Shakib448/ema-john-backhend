@@ -4,8 +4,8 @@
   "description": "\"Emajohn Backhend\"",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server",
-    "server:dev": "nodemon server"
+    "start": "nodemon server.js",
+    "start:dev": "nodemon server.js"
   },
   "author": "Muktadir",
   "license": "ISC",
