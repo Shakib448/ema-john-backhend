@@ -58,8 +58,4 @@ client.connect((err) => {
   });
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello the db it's working in the heroku site");
-});
-
-app.listen(port);
+app.listen(process.env.PORT || port);
