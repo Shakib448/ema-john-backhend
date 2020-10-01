@@ -58,7 +58,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello the db it's working in the heroku site");
 });
 
 app.listen(process.env.PORT || port);
